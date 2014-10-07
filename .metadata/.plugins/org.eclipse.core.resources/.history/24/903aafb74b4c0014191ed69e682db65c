@@ -1,0 +1,26 @@
+package com.example.helpme;
+
+import com.parse.Parse;
+import com.parse.ParseACL;
+import com.parse.ParseUser;
+
+import android.app.Application;
+
+public class HelpMeApplication extends Application {
+	
+	
+	@Overwrite
+	public void OnCreate() {
+	    // ----- INITIALIZE PARSE -----
+	    
+		Parse.initialize(this, "Bd91Uk5Obh26kExrKbqPGWxXkijNJOFMm9KFlIBV", "1sWXEvzNQO7SSLuq93wWQ0nWrns5gdT3lli6ClbF");
+
+		ParseUser.enableAutomaticUser();
+		ParseACL defaultACL = new ParseACL();
+		// Optionally enable public read access.
+		// defaultACL.setPublicReadAccess(true);
+		ParseACL.setDefaultACL(defaultACL, true);
+	}
+	
+
+}

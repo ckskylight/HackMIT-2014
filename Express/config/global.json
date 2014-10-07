@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "Express": {
+            "applicationId": "FVHBeifehUADdt7i6UuoEyxofJxeFqPcOynDaJTQ", 
+            "masterKey": "qBRv8HJx0Z07T0h2GHmcIv9I3c4nUSHPgeA2xsjW"
+        }, 
+        "_default": {
+            "link": "Express"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.3.0"
+    }
+}

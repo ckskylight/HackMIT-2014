@@ -1,0 +1,109 @@
+package com.example.helpme;
+
+import java.util.List;
+
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+import android.support.v7.app.ActionBarActivity;
+import android.telephony.TelephonyManager;
+import android.util.Log;
+import android.content.Context;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+
+public class ShelterActivity extends ActionBarActivity {
+	
+	private static String TAG = "SHELTER";
+	
+	private int headcount = 0;
+	TelephonyManager mTelephonyMgr;    
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_shelter);
+		mTelephonyMgr = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE); 
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.shelter, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+		if (id == R.id.action_settings) {
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
+	public void addPerson(View view) {
+		incrementDecrement("increment");
+	}
+	
+	public void subtractPerson(View view) {
+		incrementDecrement("decrement");
+	}
+	
+	public void incrementDecrement(String incdec) {
+		final String phoneNumber = mTelephonyMgr.getLine1Number();
+		final ParseObject userInput = new ParseObject("Herpderp");
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("Herpderp");
+       	query.whereEqualTo("Number", phoneNumber);
+		if (incdec.equals("increment")) {
+	       	query.findInBackground(new FindCallback<ParseObject>() {
+	       		@Override
+	       		public void done(List<ParseObject> entries, ParseException e) {
+	       			if (e == null) {
+	       				try {
+	       					ParseObject entry = entries.get(0);
+	           		    	entry.put("Headcount", headcount + 1);
+	           		    	entry.saveInBackground();
+	           		    	headcount++;
+	       				} catch (Exception exc) {
+	           		    	Log.e(TAG, "this isn't supposed to happen...");
+	       				}
+	       			}
+	       			else {
+	       				Log.e(TAG, "query error");
+	       			}
+	       		}
+	       	});
+		}
+		else if (incdec.equals("decrement")) {
+	       	query.findInBackground(new FindCallback<ParseObject>() {
+	       		@Override
+	       		public void done(List<ParseObject> entries, ParseException e) {
+	       			if (e == null) {
+	       				try {
+	       					ParseObject entry = entries.get(0);
+	       					if (headcount > 0) {
+	       						entry.put("Headcount", headcount - 1);
+		           		    	entry.saveInBackground();
+		           		    	headcount--;
+	       					}
+	       				} catch (Exception exc) {
+	           		    	Log.e(TAG, "this isn't supposed to happen...");
+	       				}
+	       			}
+	       			else {
+	       				Log.e(TAG, "query error");
+	       			}
+	       		}
+	       	});
+		}
+	}
+	
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">HelpMe</string>
+    <string name="title_section1">Help Me</string>
+    <string name="title_section2">Help Others</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="help_me">Help Me</string>
+    <string name="phone_hint">Phone Number</string>
+    <string name="name_hint">Name</string>
+    <string name="description_hint">Description</string>
+    <string name="help_others">Volunteer My Place</string>
+    <string name="title_activity_shelter">ShelterActivity</string>
+    <string name="people_in_shelter">People in my Shelter</string>
+    <string name="num_people">0</string>
+    <string name="add">+</string>
+    <string name="subtract">-</string>
+
+</resources>

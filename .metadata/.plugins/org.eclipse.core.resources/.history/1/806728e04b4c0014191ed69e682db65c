@@ -1,0 +1,19 @@
+package com.example.helpme;
+
+import com.parse.Parse;
+import com.parse.ParseACL;
+import com.parse.ParseUser;
+
+import android.app.Application;
+
+public class HelpMeApplication extends Application {
+	
+	@Override
+	public void onCreate() {
+		super.onCreate();
+		
+
+	}
+	
+
+}
